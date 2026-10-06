@@ -273,7 +273,7 @@ bind_exec(mainMod .. " + B", "brightnessctl -c backlight set 1%-")
 bind_exec(mainMod .. " + SHIFT + B", "brightnessctl -c backlight set +1%")
 
 -- Mainmod + Function keys
-bind_exec(mainMod .. " + F1",  "firedragon")
+bind_exec(mainMod .. " + F1",  "firefox")
 bind_exec(mainMod .. " + F2",  "thunderbird")
 bind_exec(mainMod .. " + F3",  "thunar")
 bind_exec(mainMod .. " + F4",  "geany")
@@ -338,7 +338,7 @@ bind_exec('code:121', 'pamixer --toggle-mute; notify-send " Volume: Toggle-mute"
 bind_exec('XF86AudioMicMute', 'pactl set-source-mute @DEFAULT_SOURCE@ toggle; notify-send "System Mic: Toggle-mute" -t 500')
 
 -- other bindings
-bind_exec(mainMod .. " + O", "firedragon")
+bind_exec(mainMod .. " + O", "firefox")
 hl.bind(mainMod .. " + M", hl.dsp.window.fullscreen({ mode = "maximized" }))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen_state({ internal = 0, client = 2 }))
