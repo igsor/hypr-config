@@ -338,7 +338,7 @@ bind_exec('code:121', 'pamixer --toggle-mute; notify-send " Volume: Toggle-mute"
 bind_exec('XF86AudioMicMute', 'pactl set-source-mute @DEFAULT_SOURCE@ toggle; notify-send "System Mic: Toggle-mute" -t 500')
 
 -- other bindings
-bind_exec(mainMod .. " + O", "firefox")
+bind_exec(mainMod .. " + B", "firefox")
 hl.bind(mainMod .. " + M", hl.dsp.window.fullscreen({ mode = "maximized" }))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen_state({ internal = 0, client = 2 }))
