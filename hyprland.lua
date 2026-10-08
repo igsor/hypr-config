@@ -269,8 +269,6 @@ bind_exec(mainMod .. " + SHIFT + D", "nwg-drawer -mb 10 -mr 10 -ml 10 -mt 10")
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())       -- dwindle
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.layout("togglesplit")) -- dwindle
 bind_exec(mainMod .. " + V", "cliphist list | wofi --dmenu | cliphist decode | wl-copy")
-bind_exec(mainMod .. " + B", "brightnessctl -c backlight set 1%-")
-bind_exec(mainMod .. " + SHIFT + B", "brightnessctl -c backlight set +1%")
 bind_exec("XF86PowerOff", "wlogout -c 30 -r 30 -s")
 
 
