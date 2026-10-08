@@ -264,7 +264,6 @@ hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 bind_exec(mainMod .. " + N", "thunar")
 hl.bind(mainMod .. " + SHIFT + code:65", hl.dsp.window.float({ action = "toggle" }))
 bind_exec("SUPER + D", "pkill wofi || wofi --normal-window --show drun --allow-images", { release = true })
-bind_exec(mainMod .. " + E", "emote")
 bind_exec(mainMod .. " + SHIFT + D", "nwg-drawer -mb 10 -mr 10 -ml 10 -mt 10")
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())       -- dwindle
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.layout("togglesplit")) -- dwindle
