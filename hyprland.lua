@@ -262,7 +262,7 @@ bind_exec(mainMod .. " + code:36", "kitty") -- 36 = Enter
 bind_exec(mainMod .. " + T", "kitty")
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 bind_exec(mainMod .. " + E", "thunar")
-hl.bind(mainMod .. " + SHIFT + code:65", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + SHIFT + code:65", hl.dsp.window.float({ action = "toggle" })) -- 65 = Spacebar
 bind_exec("SUPER + D", "pkill wofi || wofi --normal-window --show drun --allow-images", { release = true })
 bind_exec(mainMod .. " + SHIFT + D", "nwg-drawer -mb 10 -mr 10 -ml 10 -mt 10")
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())       -- dwindle
