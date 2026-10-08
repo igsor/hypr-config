@@ -261,7 +261,6 @@ bind_exec(mainMod .. " + SHIFT + R", "hyprctl reload")
 bind_exec(mainMod .. " + code:36", "kitty") -- 36 = Enter
 bind_exec(mainMod .. " + T", "kitty")
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
-bind_exec(mainMod .. " + SHIFT + E", "nwgbar")
 bind_exec(mainMod .. " + N", "thunar")
 hl.bind(mainMod .. " + SHIFT + code:65", hl.dsp.window.float({ action = "toggle" }))
 bind_exec("SUPER + D", "pkill wofi || wofi --normal-window --show drun --allow-images", { release = true })
@@ -272,6 +271,8 @@ hl.bind(mainMod .. " + SHIFT + P", hl.dsp.layout("togglesplit")) -- dwindle
 bind_exec(mainMod .. " + V", "cliphist list | wofi --dmenu | cliphist decode | wl-copy")
 bind_exec(mainMod .. " + B", "brightnessctl -c backlight set 1%-")
 bind_exec(mainMod .. " + SHIFT + B", "brightnessctl -c backlight set +1%")
+bind_exec("XF86PowerOff", "nwgbar")
+
 
 -- Mainmod + Function keys
 bind_exec(mainMod .. " + F1",  "firefox")
