@@ -238,6 +238,7 @@ hl.window_rule({ match = { class = "garuda-network-assistant" }, float = true })
 hl.window_rule({ match = { class = "garuda-settings-manager" },  float = true })
 hl.window_rule({ match = { class = "garuda-welcome" },           float = true })
 hl.window_rule({ match = { class = "calamares" },                float = true })
+hl.window_rule({ match = { class = ".*" }, suppress_event = "maximize" })
 
 -- Example windowrule v2
 -- windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
