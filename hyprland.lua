@@ -57,9 +57,6 @@ hl.on("hyprland.start", function()
     -- Use gtk-settings
     hl.exec_cmd("apply-gsettings")
 
-    -- low battery warning script
-    hl.exec_cmd(".local/bin/battery_warn.sh")
-
     -- Select Kitty font size once from monitor resolution.
     hl.exec_cmd(".local/bin/kitty-font-autosize.sh")
 
