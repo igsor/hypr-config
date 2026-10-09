@@ -63,6 +63,9 @@ hl.on("hyprland.start", function()
     -- Hypr Ecosystem
     -- hypridle
     hl.exec_cmd("hypridle")
+
+    -- bluetooth
+    hl.exec_cmd("blueman-applet")
 end)
 
 -- Source a Lua file (multi-file configs)
