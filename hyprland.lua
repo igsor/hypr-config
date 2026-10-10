@@ -16,17 +16,8 @@ hl.monitor({
 -------------------
 
 hl.on("hyprland.start", function()
-    -- Execute your favorite apps at launch
-    -- hl.exec_cmd("garuda-welcome")
-
     -- Add networkmanager applet to tray in waybar
     hl.exec_cmd("nm-applet --indicator")
-
-    -- Set keyboard layout
-    -- hl.exec_cmd(".local/bin/garuda-locale.sh")
-
-    -- Set monitor values. For own values, please comment with #
-    -- hl.exec_cmd(".local/bin/mon.sh")
 
     -- background
     hl.exec_cmd("wpaperd")
@@ -233,7 +224,7 @@ end
 -- See https://wiki.hyprland.org/Configuring/Keywords/ for more
 local mainMod = "SUPER"
 
--- Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
+--
 bind_exec(mainMod .. " + SHIFT + R", "hyprctl reload")
 bind_exec(mainMod .. " + code:36", "kitty") -- 36 = Enter
 bind_exec(mainMod .. " + T", "kitty")
