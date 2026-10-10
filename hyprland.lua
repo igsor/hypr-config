@@ -224,34 +224,20 @@ end
 -- See https://wiki.hyprland.org/Configuring/Keywords/ for more
 local mainMod = "SUPER"
 
---
-bind_exec(mainMod .. " + SHIFT + R", "hyprctl reload")
-bind_exec(mainMod .. " + code:36", "kitty") -- 36 = Enter
+--- Applications
 bind_exec(mainMod .. " + T", "kitty")
 bind_exec(mainMod .. " + E", "thunar")
-bind_exec(mainMod .. " + SPACE", "pkill rofi || rofi -show drun", { release = true })
 bind_exec(mainMod .. " + S", "kitty nvim")
-bind_exec(mainMod .. " + SHIFT + D", "nwg-drawer -mb 10 -mr 10 -ml 10 -mt 10")
-bind_exec(mainMod .. " + V", "cliphist list | wofi --dmenu | cliphist decode | wl-copy")
-bind_exec("XF86PowerOff", "wlogout -c 30 -r 30 -s")
-bind_exec(mainMod .. " + B", "firefox")
-bind_exec(mainMod .. " + SHIFT + C", "killall -9 wpaperd && wpaperd")
-
--- Mainmod + Function keys
-bind_exec(mainMod .. " + F1",  "firefox")
-bind_exec(mainMod .. " + F2",  "thunderbird")
-bind_exec(mainMod .. " + F3",  "thunar")
-bind_exec(mainMod .. " + F4",  "geany")
-bind_exec(mainMod .. " + F5",  "github-desktop")
-bind_exec(mainMod .. " + F6",  "gparted")
-bind_exec(mainMod .. " + F7",  "inkscape")
-bind_exec(mainMod .. " + F8",  "blender")
-bind_exec(mainMod .. " + F9",  "meld")
-bind_exec(mainMod .. " + F10", "joplin-desktop")
-bind_exec(mainMod .. " + F11", "snapper-tools")
-bind_exec(mainMod .. " + F12", "galculator")
+bind_exec(mainMod .. " + F", "firefox")
 
 --- System bindings
+bind_exec("XF86PowerOff", "wlogout -c 30 -r 30 -s")
+bind_exec(mainMod .. " + SPACE", "pkill rofi || rofi -show drun", { release = true })
+bind_exec(mainMod .. " + SHIFT + D", "nwg-drawer -mb 10 -mr 10 -ml 10 -mt 10")
+bind_exec(mainMod .. " + SHIFT + R", "hyprctl reload")
+bind_exec(mainMod .. " + V", "cliphist list | wofi --dmenu | cliphist decode | wl-copy")
+bind_exec(mainMod .. " + SHIFT + C", "killall -9 wpaperd && wpaperd")
+
 -- laptop-specific keys
 -- volume
 bind_exec('code:122', 'pamixer --decrease 5; notify-send " Volume: "$(pamixer --get-volume) -t 500')
@@ -269,13 +255,10 @@ hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd("grimblast save active && notify-
 hl.bind(mainMod .. " + SHIFT + Print", hl.dsp.exec_cmd("grimblast output active && notify-send Output captured"))
 
 --- Window bindings
-hl.bind(  mainMod .. " + SHIFT + code:65", hl.dsp.window.float({ action = "toggle" })) -- 65 = Spacebar
 hl.bind(  mainMod .. " + Q", hl.dsp.window.close())
-hl.bind(  mainMod .. " + W", hl.dsp.window.pseudo())       -- dwindle
+hl.bind(  mainMod .. " + SHIFT + F", hl.dsp.window.float({ action = "toggle" })) -- 65 = Spacebar
 hl.bind(  mainMod .. " + SHIFT + P", hl.dsp.layout("togglesplit")) -- dwindle
 hl.bind(  mainMod .. " + M", hl.dsp.window.fullscreen({ mode = "maximized" }))
-hl.bind(  mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
-hl.bind(  mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen_state({ internal = 0, client = 2 }))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(  mainMod .. " + left",  hl.dsp.focus({ direction = "l" }))
@@ -288,11 +271,11 @@ hl.bind(  mainMod .. " + down",  hl.dsp.focus({ direction = "d" }))
 hl.bind(  mainMod .. " + J",     hl.dsp.focus({ direction = "d" }))
 
 -- Move/resize windows with mainMod + LMB/RMB and dragging
-hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
-hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
+hl.bind(  mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
+hl.bind(  mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- for resizing window
-hl.bind(mainMod .. " + R", hl.dsp.submap("resize"))
+hl.bind(  mainMod .. " + R", hl.dsp.submap("resize"))
 hl.define_submap("resize", function()
     -- sets repeatable binds for resizing the active window
     hl.bind("right", hl.dsp.window.resize({ x = 50,  y = 0,   relative = true }), { repeating = true })
@@ -309,14 +292,14 @@ hl.define_submap("resize", function()
 end)
 
 -- to move window
-hl.bind(mainMod .. " + SHIFT + up",    hl.dsp.window.move({ direction = "u" }))
-hl.bind(mainMod .. " + SHIFT + K",     hl.dsp.window.move({ direction = "u" }))
-hl.bind(mainMod .. " + SHIFT + down",  hl.dsp.window.move({ direction = "d" }))
-hl.bind(mainMod .. " + SHIFT + J",     hl.dsp.window.move({ direction = "d" }))
-hl.bind(mainMod .. " + SHIFT + left",  hl.dsp.window.move({ direction = "l" }))
-hl.bind(mainMod .. " + SHIFT + H",     hl.dsp.window.move({ direction = "l" }))
-hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.move({ direction = "r" }))
-hl.bind(mainMod .. " + SHIFT + L",     hl.dsp.window.move({ direction = "r" }))
+hl.bind(  mainMod .. " + SHIFT + up",    hl.dsp.window.move({ direction = "u" }))
+hl.bind(  mainMod .. " + SHIFT + K",     hl.dsp.window.move({ direction = "u" }))
+hl.bind(  mainMod .. " + SHIFT + down",  hl.dsp.window.move({ direction = "d" }))
+hl.bind(  mainMod .. " + SHIFT + J",     hl.dsp.window.move({ direction = "d" }))
+hl.bind(  mainMod .. " + SHIFT + left",  hl.dsp.window.move({ direction = "l" }))
+hl.bind(  mainMod .. " + SHIFT + H",     hl.dsp.window.move({ direction = "l" }))
+hl.bind(  mainMod .. " + SHIFT + right", hl.dsp.window.move({ direction = "r" }))
+hl.bind(  mainMod .. " + SHIFT + L",     hl.dsp.window.move({ direction = "r" }))
 
 
 --- Workspace bindings
@@ -339,15 +322,5 @@ for i = 1, 10 do
 end
 
 -- Scroll through existing workspaces with mainMod + scroll
-hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
-
--- special workspace
--- hl.bind(mainMod .. " + SHIFT + S", hl.dsp.workspace.toggle_special("magic"))
--- hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "+0", follow = true }))
--- hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic", follow = true }))
-
--- video play paues bindings
-bind_exec("code:172", "playerctl play-pause")
-bind_exec("code:171", "playerctl next")
-bind_exec("code:173", "playerctl previous")
+hl.bind(  mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(  mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
