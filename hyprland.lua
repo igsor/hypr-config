@@ -201,13 +201,6 @@ hl.window_rule({
     stay_focused = true,
 })
 
--- window rules with evaluation
-hl.window_rule({
-    name    = "windowrule-1",
-    opacity = "0.85 0.85",
-    match   = { float = true },
-})
-
 -- layer config
 -- NOTE: layer rules match namespace, not class/float. Kept the useful waybar rule below.
 
