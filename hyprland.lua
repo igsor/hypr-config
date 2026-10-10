@@ -375,9 +375,3 @@ hl.config({
         vfr = true,
     },
 })
-
--- enable G-Hyprland
-bind_exec(mainMod .. " + SHIFT + G", "kitty -e ~/.local/bin/bear/implement_gum.sh enable")
-
--- Install Garuda Hyprland
-bind_exec(mainMod .. " + I", ".local/bin/calamares.sh")
