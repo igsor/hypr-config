@@ -133,6 +133,12 @@ hl.config({
         disable_hyprland_logo = true,
     },
 
+    -- Performance Tweaks (For less power consumption without sacrificing performance)
+    -- See : https://wiki.hyprland.org/Configuring/Performance/
+    -- Hyprland 0.55+ uses debug.vfr. It defaults to true; keep it explicit here.
+    debug = {
+        vfr = true,
+    },
 })
 
 -- Apply blur universally to all layer-shell surfaces
@@ -185,7 +191,32 @@ hl.gesture({
 --------------------------------
 
 -- See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
-hl.window_rule({ match = { class = ".*" },                       suppress_event = "maximize" })
+hl.window_rule({
+    match = { class = ".*" },
+    suppress_event = "maximize",
+})
+
+-- window rules with evaluation
+hl.window_rule({
+    name    = "windowrule-1",
+    opacity = "0.85 0.85",
+    match   = { float = true },
+})
+
+-- layer config
+-- NOTE: layer rules match namespace, not class/float. Kept the useful waybar rule below.
+
+-- status bar
+hl.layer_rule({
+    match        = { namespace = "waybar" },
+    ignore_alpha = 0.5,
+})
+
+hl.layer_rule({
+    match      = { namespace = ".*nwgbar.*" },
+    blur       = true,
+    dim_around = false,
+})
 
 ---------------------
 ---- KEYBINDINGS ----
@@ -212,7 +243,11 @@ hl.bind(  mainMod .. " + W", hl.dsp.window.pseudo())       -- dwindle
 hl.bind(  mainMod .. " + SHIFT + P", hl.dsp.layout("togglesplit")) -- dwindle
 bind_exec(mainMod .. " + V", "cliphist list | wofi --dmenu | cliphist decode | wl-copy")
 bind_exec("XF86PowerOff", "wlogout -c 30 -r 30 -s")
-
+bind_exec(mainMod .. " + B", "firefox")
+hl.bind(  mainMod .. " + M", hl.dsp.window.fullscreen({ mode = "maximized" }))
+hl.bind(  mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
+hl.bind(  mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen_state({ internal = 0, client = 2 }))
+bind_exec(mainMod .. " + SHIFT + C", "killall -9 wpaperd && wpaperd")
 
 -- Mainmod + Function keys
 bind_exec(mainMod .. " + F1",  "firefox")
@@ -264,44 +299,24 @@ hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
--- status bar
--- NOTE: layer rules match namespace, not class/float. Kept the useful waybar rule below.
-hl.layer_rule({
-    match        = { namespace = "waybar" },
-    ignore_alpha = 0.5,
-})
-
--- set volume (laptops only and may or may not work on PCs)
+-- laptop-specific keys
+-- volume
 bind_exec('code:122', 'pamixer --decrease 5; notify-send " Volume: "$(pamixer --get-volume) -t 500')
 bind_exec('code:123', 'pamixer --increase 5; notify-send " Volume: "$(pamixer --get-volume) -t 500')
 bind_exec('code:121', 'pamixer --toggle-mute; notify-send " Volume: Toggle-mute" -t 500')
 bind_exec('XF86AudioMicMute', 'pactl set-source-mute @DEFAULT_SOURCE@ toggle; notify-send "System Mic: Toggle-mute" -t 500')
-
--- other bindings
-bind_exec(mainMod .. " + B", "firefox")
-hl.bind(mainMod .. " + M", hl.dsp.window.fullscreen({ mode = "maximized" }))
-hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
-hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen_state({ internal = 0, client = 2 }))
+-- brightness
 bind_exec("code:232", "brightnessctl -c backlight set 5%-")
 bind_exec("code:233", "brightnessctl -c backlight set +5%")
-bind_exec(mainMod .. " + SHIFT + C", "killall -9 wpaperd && wpaperd")
 
--- https://github.com/hyprwm/contrib/blob/main/grimblast/grimblast.1.scd
--- Print: All outputs
--- SHIFT+Print: Select area
--- $mainMod+Print: Current window
--- $mainMod+Shift+Print: Current output
-
+-- screenshot
 hl.bind("Print", hl.dsp.exec_cmd("grimblast save screen && notify-send Screenshot captured"))
 hl.bind("SHIFT + Print", hl.dsp.exec_cmd("grimblast save area && notify-send Selected\\ area captured"))
 hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd("grimblast save active && notify-send Active\\ window captured"))
 hl.bind(mainMod .. " + SHIFT + Print", hl.dsp.exec_cmd("grimblast output active && notify-send Output captured"))
 
 -- for resizing window
--- will switch to a submap called resize
 hl.bind(mainMod .. " + R", hl.dsp.submap("resize"))
-
--- will start a submap called "resize"
 hl.define_submap("resize", function()
     -- sets repeatable binds for resizing the active window
     hl.bind("right", hl.dsp.window.resize({ x = 50,  y = 0,   relative = true }), { repeating = true })
@@ -316,9 +331,6 @@ hl.define_submap("resize", function()
     -- use reset to go back to the global submap
     hl.bind("escape", hl.dsp.submap("reset"))
 end)
-
--- will reset the submap, meaning end the current one and return to the global one
--- submap=reset
 
 -- to move window
 hl.bind(mainMod .. " + SHIFT + up",    hl.dsp.window.move({ direction = "u" }))
@@ -335,31 +347,7 @@ hl.bind(mainMod .. " + SHIFT + L",     hl.dsp.window.move({ direction = "r" }))
 -- hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "+0", follow = true }))
 -- hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic", follow = true }))
 
--- window rules
--- nwgbar :
-hl.layer_rule({
-    match      = { namespace = ".*nwgbar.*" },
-    blur       = true,
-    dim_around = false,
-})
-
--- window rules with evaluation
-hl.window_rule({
-    name    = "windowrule-1",
-    opacity = "0.85 0.85",
-    match   = { float = true },
-})
-
 -- video play paues bindings
 bind_exec("code:172", "playerctl play-pause")
 bind_exec("code:171", "playerctl next")
 bind_exec("code:173", "playerctl previous")
-
--- Performance Tweaks (For less power consumption without sacrificing performance)
--- See : https://wiki.hyprland.org/Configuring/Performance/
--- Hyprland 0.55+ uses debug.vfr. It defaults to true; keep it explicit here.
-hl.config({
-    debug = {
-        vfr = true,
-    },
-})
