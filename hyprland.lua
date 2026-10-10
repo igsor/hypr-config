@@ -335,13 +335,6 @@ hl.bind(mainMod .. " + SHIFT + L",     hl.dsp.window.move({ direction = "r" }))
 -- hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "+0", follow = true }))
 -- hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic", follow = true }))
 
--- other blurings
-hl.layer_rule({ match = { namespace = "wofi" },            blur = true })
-hl.layer_rule({ match = { namespace = "thunar" },          blur = true })
-hl.layer_rule({ match = { namespace = "gedit" },           blur = true })
-hl.layer_rule({ match = { namespace = "gtk-layer-shell" }, blur = true }) -- for nwg-drawer
-hl.layer_rule({ match = { namespace = "catfish" },         blur = true })
-
 -- window rules
 -- nwgbar :
 hl.layer_rule({
@@ -349,11 +342,6 @@ hl.layer_rule({
     blur       = true,
     dim_around = false,
 })
-
-hl.window_rule({ match = { title = "thunar" },  opacity = "0.85 override 0.85 override" })
-hl.window_rule({ match = { title = "gedit" },   opacity = "0.85 override 0.85 override" })
-hl.window_rule({ match = { title = "catfish" }, opacity = "0.85 override 0.85 override" })
-hl.window_rule({ match = { title = "wofi" },    stay_focused = true })
 
 -- window rules with evaluation
 hl.window_rule({
