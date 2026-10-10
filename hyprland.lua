@@ -196,6 +196,11 @@ hl.window_rule({
     suppress_event = "maximize",
 })
 
+hl.window_rule({
+    match = { title = "rofi" },
+    stay_focused = true,
+})
+
 -- window rules with evaluation
 hl.window_rule({
     name    = "windowrule-1",
@@ -210,6 +215,12 @@ hl.window_rule({
 hl.layer_rule({
     match        = { namespace = "waybar" },
     ignore_alpha = 0.5,
+})
+
+hl.layer_rule({
+    match       = { namespace = "rofi" },
+    blur        = false,
+    dim_around  = true,
 })
 
 hl.layer_rule({
