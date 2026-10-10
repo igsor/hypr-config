@@ -228,20 +228,13 @@ local mainMod = "SUPER"
 bind_exec(mainMod .. " + SHIFT + R", "hyprctl reload")
 bind_exec(mainMod .. " + code:36", "kitty") -- 36 = Enter
 bind_exec(mainMod .. " + T", "kitty")
-hl.bind(  mainMod .. " + Q", hl.dsp.window.close())
 bind_exec(mainMod .. " + E", "thunar")
-hl.bind(  mainMod .. " + SHIFT + code:65", hl.dsp.window.float({ action = "toggle" })) -- 65 = Spacebar
 bind_exec(mainMod .. " + SPACE", "pkill rofi || rofi -show drun", { release = true })
 bind_exec(mainMod .. " + S", "kitty nvim")
 bind_exec(mainMod .. " + SHIFT + D", "nwg-drawer -mb 10 -mr 10 -ml 10 -mt 10")
-hl.bind(  mainMod .. " + W", hl.dsp.window.pseudo())       -- dwindle
-hl.bind(  mainMod .. " + SHIFT + P", hl.dsp.layout("togglesplit")) -- dwindle
 bind_exec(mainMod .. " + V", "cliphist list | wofi --dmenu | cliphist decode | wl-copy")
 bind_exec("XF86PowerOff", "wlogout -c 30 -r 30 -s")
 bind_exec(mainMod .. " + B", "firefox")
-hl.bind(  mainMod .. " + M", hl.dsp.window.fullscreen({ mode = "maximized" }))
-hl.bind(  mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
-hl.bind(  mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen_state({ internal = 0, client = 2 }))
 bind_exec(mainMod .. " + SHIFT + C", "killall -9 wpaperd && wpaperd")
 
 -- Mainmod + Function keys
@@ -258,42 +251,7 @@ bind_exec(mainMod .. " + F10", "joplin-desktop")
 bind_exec(mainMod .. " + F11", "snapper-tools")
 bind_exec(mainMod .. " + F12", "galculator")
 
--- Move focus with mainMod + arrow keys
-hl.bind(  mainMod .. " + left",  hl.dsp.focus({ direction = "l" }))
-hl.bind(  mainMod .. " + H",     hl.dsp.focus({ direction = "l" }))
-hl.bind(  mainMod .. " + right", hl.dsp.focus({ direction = "r" }))
-hl.bind(  mainMod .. " + L",     hl.dsp.focus({ direction = "r" }))
-hl.bind(  mainMod .. " + up",    hl.dsp.focus({ direction = "u" }))
-hl.bind(  mainMod .. " + K",     hl.dsp.focus({ direction = "u" }))
-hl.bind(  mainMod .. " + down",  hl.dsp.focus({ direction = "d" }))
-hl.bind(  mainMod .. " + J",     hl.dsp.focus({ direction = "d" }))
-
--- Switch workspaces with mainMod + [0-9]
-for i = 1, 10 do
-    local key = i % 10 -- 10 maps to key 0
-    hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
-end
-
--- Move to workspace with focused container with ALT + SHIFT + [0-9]
-for i = 1, 10 do
-    local key = i % 10 -- 10 maps to key 0
-    hl.bind("ALT + SHIFT + " .. key, hl.dsp.window.move({ workspace = i, follow = true }))
-end
-
--- Move active window to a workspace with mainMod + SHIFT + [0-9]
-for i = 1, 10 do
-    local key = i % 10 -- 10 maps to key 0
-    hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i, follow = false }))
-end
-
--- Scroll through existing workspaces with mainMod + scroll
-hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
-
--- Move/resize windows with mainMod + LMB/RMB and dragging
-hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
-hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
-
+--- System bindings
 -- laptop-specific keys
 -- volume
 bind_exec('code:122', 'pamixer --decrease 5; notify-send " Volume: "$(pamixer --get-volume) -t 500')
@@ -309,6 +267,29 @@ hl.bind("Print", hl.dsp.exec_cmd("grimblast save screen && notify-send Screensho
 hl.bind("SHIFT + Print", hl.dsp.exec_cmd("grimblast save area && notify-send Selected\\ area captured"))
 hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd("grimblast save active && notify-send Active\\ window captured"))
 hl.bind(mainMod .. " + SHIFT + Print", hl.dsp.exec_cmd("grimblast output active && notify-send Output captured"))
+
+--- Window bindings
+hl.bind(  mainMod .. " + SHIFT + code:65", hl.dsp.window.float({ action = "toggle" })) -- 65 = Spacebar
+hl.bind(  mainMod .. " + Q", hl.dsp.window.close())
+hl.bind(  mainMod .. " + W", hl.dsp.window.pseudo())       -- dwindle
+hl.bind(  mainMod .. " + SHIFT + P", hl.dsp.layout("togglesplit")) -- dwindle
+hl.bind(  mainMod .. " + M", hl.dsp.window.fullscreen({ mode = "maximized" }))
+hl.bind(  mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
+hl.bind(  mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen_state({ internal = 0, client = 2 }))
+
+-- Move focus with mainMod + arrow keys
+hl.bind(  mainMod .. " + left",  hl.dsp.focus({ direction = "l" }))
+hl.bind(  mainMod .. " + H",     hl.dsp.focus({ direction = "l" }))
+hl.bind(  mainMod .. " + right", hl.dsp.focus({ direction = "r" }))
+hl.bind(  mainMod .. " + L",     hl.dsp.focus({ direction = "r" }))
+hl.bind(  mainMod .. " + up",    hl.dsp.focus({ direction = "u" }))
+hl.bind(  mainMod .. " + K",     hl.dsp.focus({ direction = "u" }))
+hl.bind(  mainMod .. " + down",  hl.dsp.focus({ direction = "d" }))
+hl.bind(  mainMod .. " + J",     hl.dsp.focus({ direction = "d" }))
+
+-- Move/resize windows with mainMod + LMB/RMB and dragging
+hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
+hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- for resizing window
 hl.bind(mainMod .. " + R", hl.dsp.submap("resize"))
@@ -336,6 +317,30 @@ hl.bind(mainMod .. " + SHIFT + left",  hl.dsp.window.move({ direction = "l" }))
 hl.bind(mainMod .. " + SHIFT + H",     hl.dsp.window.move({ direction = "l" }))
 hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.move({ direction = "r" }))
 hl.bind(mainMod .. " + SHIFT + L",     hl.dsp.window.move({ direction = "r" }))
+
+
+--- Workspace bindings
+-- Switch workspaces with mainMod + [0-9]
+for i = 1, 10 do
+    local key = i % 10 -- 10 maps to key 0
+    hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
+end
+
+-- Move to workspace with focused container with ALT + SHIFT + [0-9]
+for i = 1, 10 do
+    local key = i % 10 -- 10 maps to key 0
+    hl.bind("ALT + SHIFT + " .. key, hl.dsp.window.move({ workspace = i, follow = true }))
+end
+
+-- Move active window to a workspace with mainMod + SHIFT + [0-9]
+for i = 1, 10 do
+    local key = i % 10 -- 10 maps to key 0
+    hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i, follow = false }))
+end
+
+-- Scroll through existing workspaces with mainMod + scroll
+hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
 
 -- special workspace
 -- hl.bind(mainMod .. " + SHIFT + S", hl.dsp.workspace.toggle_special("magic"))
