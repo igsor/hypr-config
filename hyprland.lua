@@ -1,16 +1,4 @@
 
--- See https://wiki.hyprland.org/Configuring/Monitors/
--- Source a Lua file (multi-file configs)
--- require("myColors")
-hl.monitor({
-    output   = "eDP-1",
-    mode     = "1920x1080@60.00000",
-    position = "0x0",
-    scale    = 1,
-})
-
--- See https://wiki.hyprland.org/Configuring/Keywords/ for more
-
 -------------------
 ---- AUTOSTART ----
 -------------------
@@ -44,6 +32,26 @@ hl.on("hyprland.start", function()
 
     -- bluetooth
     hl.exec_cmd("blueman-applet")
+end)
+
+
+-----------------------------
+---- DYNAMIC ENVIRONMENT ----
+-----------------------------
+
+hl.on('monitor.added', function(monitor)
+    local configurations = {
+        ["AOC Q32G1WG4 0x000012FC"] = "~/.config/hypr/environments/home-office.lua",
+        ["ONKYO Corporation HT-R494"] = "~/.config/hypr/environments/home-beamer.lua",
+    }
+    local environment_file = configurations[monitor.description]
+    if environment_file then
+        require(environment_file)
+    end
+end)
+
+hl.on('monitor.removed', function(monitor)
+    require('~/.config/hypr/environments/standalone.lua')
 end)
 
 -------------------------------
