@@ -22,13 +22,13 @@ hl.monitor({
 });
 
 -- odd workspaces on the big screen
-for i = 1, 5 do
-    hl.workspace_rule({ workspace = i * 2 - 1, monitor="HDMI-A-1" })
+for i = 1, 6 do
+    hl.workspace_rule({ workspace = i, monitor="HDMI-A-1" })
 end
 
 -- even workspaces on the laptop
-for i = 1, 5 do
-    hl.workspace_rule({ workspace = i * 2, monitor="eDP-1" })
+for i = 7, 10 do
+    hl.workspace_rule({ workspace = i, monitor="eDP-1" })
 end
 
 -- switch audio source to HDMI
