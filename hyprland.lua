@@ -257,6 +257,7 @@ bind_exec("code:232", "brightnessctl -c backlight set 5%-")
 bind_exec("code:233", "brightnessctl -c backlight set +5%")
 
 -- screenshot
+hl.env("XDG_SCREENSHOTS_DIR", "Pictures/screenshots/")
 hl.bind("Print", hl.dsp.exec_cmd("grimblast save screen && notify-send Screenshot captured"))
 hl.bind("SHIFT + Print", hl.dsp.exec_cmd("grimblast save area && notify-send Selected\\ area captured"))
 hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd("grimblast save active && notify-send Active\\ window captured"))
