@@ -1,11 +1,17 @@
 -- home office
+hl.notification.create({
+    text = "Switching to Home-Office monitor setup.",
+    timeout = 5000,
+    icon = 1,
+});
+
 hl.monitor({
     output   = "eDP-1",
     mode     = "1920x1200@60.00000",
     position = "2560x0",
     scale    = 1,
     vrr      = 0,
-})
+});
 
 hl.monitor({
     output   = "HDMI-A-1",
@@ -13,7 +19,7 @@ hl.monitor({
     position = "0x0",
     scale    = 1,
     vrr      = 0,
-})
+});
 
 -- odd workspaces on the big screen
 for i = 1, 5 do
@@ -26,6 +32,6 @@ for i = 1, 5 do
 end
 
 -- switch audio source to HDMI
-local sink = "alsa_output.pci-0000_04_00.1.hdmi-stereo-extra1"
-hl.exec_cmd("pactl set-default-sink " .. sink)
-hl.exec_cmd("pactl set-sink-mute " .. sink .. " false")
+local sink = "alsa_output.pci-0000_04_00.1.hdmi-stereo-extra1";
+hl.exec_cmd("pactl set-default-sink " .. sink);
+hl.exec_cmd("pactl set-sink-mute " .. sink .. " false");
