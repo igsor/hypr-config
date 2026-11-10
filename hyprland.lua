@@ -244,7 +244,7 @@ bind_exec(mainMod .. " + SPACE", "pkill rofi || rofi -show drun", { release = tr
 bind_exec(mainMod .. " + SHIFT + D", "nwg-drawer -mb 10 -mr 10 -ml 10 -mt 10")
 bind_exec(mainMod .. " + SHIFT + R", "hyprctl reload")
 bind_exec(mainMod .. " + V", "cliphist list | wofi --dmenu | cliphist decode | wl-copy")
-bind_exec(mainMod .. " + SHIFT + C", "killall -9 wpaperd && wpaperd")
+bind_exec(mainMod .. " + SHIFT + C", "killall -9 wpaperd ; wpaperd")
 
 -- laptop-specific keys
 -- volume
